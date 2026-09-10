@@ -1,0 +1,192 @@
+{
+ "Banovich_Kropski_2020": {
+  "club": 1.3416129998656954,
+  "goblet": 0.42306160132090254,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 3.2394195632494407,
+   "goblet": 0.0,
+   "smg": 1.5242727519962223,
+   "ciliated": 1.4714681670540954
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "quantile_0.75",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Barbry_Leroy_2020": {
+  "club": 1.2994461862481437,
+  "goblet": 1.33549969514211,
+  "smg": Infinity,
+  "ciliated": 0.054869776756662166,
+  "separation": {
+   "club": 3.4407097763586107,
+   "goblet": 0.0,
+   "smg": 1.645223575582766,
+   "ciliated": 2.0848260631142193
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "quantile_0.75",
+   "smg": "no_population_detected",
+   "ciliated": "none"
+  },
+  "method": "gmm"
+ },
+ "Krasnow_2020": {
+  "club": 1.2200291418846976,
+  "goblet": 0.10635008573532109,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 2.977710633842543,
+   "goblet": 0.0,
+   "smg": 1.031845966004921,
+   "ciliated": 0.0
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "quantile_0.75",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Lafyatis_Rojas_2019": {
+  "club": 1.194812521529356,
+  "goblet": 0.9402902070939102,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 3.844367967262477,
+   "goblet": 3.2611418389609375,
+   "smg": 1.3172492038543315,
+   "ciliated": 1.1301412605963501
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "none",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Meyer_2019": {
+  "club": 1.1055794681129556,
+  "goblet": 0.3165955893198649,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 3.268091943896975,
+   "goblet": 0.0,
+   "smg": 1.9218159945241047,
+   "ciliated": 1.72576262037016
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "quantile_0.75",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Misharin_2021": {
+  "club": 1.1139567681101792,
+  "goblet": 0.43685614214602664,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 2.8151270318705075,
+   "goblet": 3.9482359926893777,
+   "smg": 1.4684024563306837,
+   "ciliated": 0.0
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "none",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Misharin_Budinger_2018": {
+  "club": 0.8845911804255053,
+  "goblet": -0.10090323130289713,
+  "smg": 2.400607625915917,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 3.3507675972630127,
+   "goblet": 0.0,
+   "smg": 51.71703223192501,
+   "ciliated": 1.6400371441556847
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "quantile_0.75",
+   "smg": "none",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Nawijn_2021": {
+  "club": 2.196699434397172,
+  "goblet": 1.6966783078511556,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 0.0,
+   "goblet": 0.0,
+   "smg": 1.4424610896228338,
+   "ciliated": 0.0
+  },
+  "fallback": {
+   "club": "quantile_0.75",
+   "goblet": "quantile_0.75",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Seibold_2020": {
+  "club": 0.9964414372736095,
+  "goblet": 1.407168547312419,
+  "smg": Infinity,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 0.0,
+   "goblet": 0.0,
+   "smg": 1.4663368111574246,
+   "ciliated": 0.0
+  },
+  "fallback": {
+   "club": "quantile_0.75",
+   "goblet": "quantile_0.75",
+   "smg": "no_population_detected",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ },
+ "Teichmann_Meyer_2019": {
+  "club": 1.4844027059824008,
+  "goblet": 0.5389887706090316,
+  "smg": 0.07973982891549157,
+  "ciliated": Infinity,
+  "separation": {
+   "club": 2.7383230424245317,
+   "goblet": 2.90067787545149,
+   "smg": 3.9329742802344723,
+   "ciliated": 1.9487533406363031
+  },
+  "fallback": {
+   "club": "none",
+   "goblet": "none",
+   "smg": "none",
+   "ciliated": "no_population_detected"
+  },
+  "method": "gmm"
+ }
+}

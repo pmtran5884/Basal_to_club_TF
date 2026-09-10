@@ -1,0 +1,4 @@
+pair,spearman_rho,top20_overlap,n_tf
+basal_to_club vs basal_to_goblet,0.9362687511902374,12,1533
+basal_to_club vs basal_to_ciliated,0.7540170757048256,3,1533
+basal_to_goblet vs basal_to_ciliated,0.7626012302518035,8,1533

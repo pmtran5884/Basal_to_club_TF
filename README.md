@@ -138,3 +138,11 @@ Nucleic Acids Res 2023).
 ## License
 
 MIT.
+
+## Run outputs and QC
+
+- [`docs/RUN_REPORT.md`](docs/RUN_REPORT.md) — what the first real run did, and the four defects it exposed
+- [`docs/qc_2026-09/QC_REPORT.md`](docs/qc_2026-09/QC_REPORT.md) — QC tables and figures: study inventory,
+  club/goblet resolver performance (leave-one-study-out), positive-control recovery, three-lineage driver
+  comparison, and regulon evidence for the candidate basal to club drivers
+- `docs/qc_2026-09/run_tables/` — the run's result tables (`results/` itself is git-ignored)

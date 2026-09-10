@@ -1,0 +1,167 @@
+{
+  "gate": {
+    "two_family": {
+      "passed": false,
+      "per_contrast": {
+        "basal_to_goblet": {
+          "passed": false,
+          "families_passed": [],
+          "secondary_frac_in_top10pct": 0.6,
+          "failure_reasons": [
+            "TF absent from the tested universe",
+            "absolute rank 43 > 25"
+          ]
+        },
+        "basal_to_ciliated": {
+          "passed": false,
+          "families_passed": [
+            "prior_expression"
+          ],
+          "secondary_frac_in_top10pct": 0.4166666666666667,
+          "failure_reasons": [
+            "TF absent from the tested universe"
+          ]
+        }
+      },
+      "specificity_passed": false,
+      "specificity_detail": [
+        {
+          "tf": "SPDEF",
+          "own_contrast": "basal_to_goblet",
+          "own_rank": null,
+          "club_rank": null,
+          "passed": false,
+          "reason": "TF missing from one contrast",
+          "family": "prior_chipseq"
+        },
+        {
+          "tf": "FOXJ1",
+          "own_contrast": "basal_to_ciliated",
+          "own_rank": null,
+          "club_rank": null,
+          "passed": false,
+          "reason": "TF missing from one contrast",
+          "family": "prior_chipseq"
+        },
+        {
+          "tf": "SPDEF",
+          "own_contrast": "basal_to_goblet",
+          "own_rank": 43,
+          "club_rank": 94,
+          "passed": true,
+          "reason": "specific",
+          "family": "prior_expression"
+        },
+        {
+          "tf": "FOXJ1",
+          "own_contrast": "basal_to_ciliated",
+          "own_rank": 1,
+          "club_rank": 197,
+          "passed": true,
+          "reason": "specific",
+          "family": "prior_expression"
+        }
+      ],
+      "gating_recovery_score": 1.035658,
+      "contrasts_not_evaluated": [
+        "basal_identity",
+        "basal_to_deuterosomal"
+      ],
+      "relaxation": null
+    },
+    "single_family": {
+      "passed": false,
+      "per_contrast": {
+        "basal_to_goblet": {
+          "passed": false,
+          "families_passed": [],
+          "secondary_frac_in_top10pct": 0.6,
+          "failure_reasons": [
+            "TF absent from the tested universe",
+            "absolute rank 43 > 25"
+          ]
+        },
+        "basal_to_ciliated": {
+          "passed": false,
+          "families_passed": [
+            "prior_expression"
+          ],
+          "secondary_frac_in_top10pct": 0.4166666666666667,
+          "failure_reasons": [
+            "TF absent from the tested universe"
+          ]
+        }
+      },
+      "specificity_passed": false,
+      "specificity_detail": [
+        {
+          "tf": "SPDEF",
+          "own_contrast": "basal_to_goblet",
+          "own_rank": null,
+          "club_rank": null,
+          "passed": false,
+          "reason": "TF missing from one contrast",
+          "family": "prior_chipseq"
+        },
+        {
+          "tf": "FOXJ1",
+          "own_contrast": "basal_to_ciliated",
+          "own_rank": null,
+          "club_rank": null,
+          "passed": false,
+          "reason": "TF missing from one contrast",
+          "family": "prior_chipseq"
+        },
+        {
+          "tf": "SPDEF",
+          "own_contrast": "basal_to_goblet",
+          "own_rank": 43,
+          "club_rank": 94,
+          "passed": true,
+          "reason": "specific",
+          "family": "prior_expression"
+        },
+        {
+          "tf": "FOXJ1",
+          "own_contrast": "basal_to_ciliated",
+          "own_rank": 1,
+          "club_rank": 197,
+          "passed": true,
+          "reason": "specific",
+          "family": "prior_expression"
+        }
+      ],
+      "gating_recovery_score": 1.035658,
+      "contrasts_not_evaluated": [
+        "basal_identity",
+        "basal_to_deuterosomal"
+      ],
+      "relaxation": {
+        "require_both_network_families": false
+      }
+    }
+  },
+  "specificity_combined": [
+    {
+      "tf": "SPDEF",
+      "own_contrast": "basal_to_goblet",
+      "own_rank": 58,
+      "club_rank": 102,
+      "passed": true,
+      "reason": "specific"
+    },
+    {
+      "tf": "FOXJ1",
+      "own_contrast": "basal_to_ciliated",
+      "own_rank": 1,
+      "club_rank": 212,
+      "passed": true,
+      "reason": "specific"
+    }
+  ],
+  "n_tf_ranked": 1533,
+  "families": {
+    "prior_chipseq": 336,
+    "prior_expression": 1534
+  }
+}

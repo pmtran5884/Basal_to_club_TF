@@ -1,0 +1,27 @@
+contrast,tf,kind,rank,rank_percentile,nes,fdr,n_tf_universe,passed,reason,family
+basal_to_goblet,SPDEF,primary,,,,,336,False,TF absent from the tested universe,prior_chipseq
+basal_to_goblet,FOXA3,secondary,,,,,336,False,not in top 10%,prior_chipseq
+basal_to_goblet,CREB3L1,secondary,67.0,0.19940476190476192,0.8373413574155706,0.5545043393872116,336,False,not in top 10%,prior_chipseq
+basal_to_goblet,XBP1,secondary,5.0,0.01488095238095238,4.617841661196576,2.7918139143861732e-05,336,True,in top 10%,prior_chipseq
+basal_to_goblet,ELF3,secondary,18.0,0.05357142857142857,2.9285139452454145,0.0112745893831658,336,True,in top 10%,prior_chipseq
+basal_to_goblet,EHF,secondary,116.0,0.34523809523809523,-0.3853517991661053,0.8159586233831263,336,False,not in top 10%,prior_chipseq
+basal_to_ciliated,FOXJ1,primary,,,,,336,False,TF absent from the tested universe,prior_chipseq
+basal_to_ciliated,RFX2,secondary,3.0,0.008928571428571428,16.144946550251063,3.549750709072211e-56,336,True,in top 10%,prior_chipseq
+basal_to_ciliated,RFX3,secondary,,,,,336,False,not in top 10%,prior_chipseq
+basal_to_ciliated,TP73,secondary,,,,,336,False,not in top 10%,prior_chipseq
+basal_to_ciliated,MYB,secondary,19.0,0.05654761904761905,10.879460781562686,4.222517952114225e-11,336,True,in top 10%,prior_chipseq
+basal_to_ciliated,E2F4,secondary,328.0,0.9761904761904762,-14.536665895938384,1.5782700487565493e-21,336,False,not in top 10%,prior_chipseq
+basal_to_ciliated,GMNC,secondary,,,,,336,False,not in top 10%,prior_chipseq
+basal_to_goblet,SPDEF,primary,43.0,0.02803129074315515,3.9284257229493584,0.0244323450398124,1534,False,absolute rank 43 > 25,prior_expression
+basal_to_goblet,FOXA3,secondary,17.0,0.01108213820078227,5.84703063543221,0.0021571605925158,1534,True,in top 10%,prior_expression
+basal_to_goblet,CREB3L1,secondary,32.0,0.020860495436766623,4.901990678686036,0.0021770636411859,1534,True,in top 10%,prior_expression
+basal_to_goblet,XBP1,secondary,4.0,0.002607561929595828,8.2388634877905,1.083816541671432e-05,1534,True,in top 10%,prior_expression
+basal_to_goblet,ELF3,secondary,5.0,0.003259452411994785,8.192312671813855,2.60658062016354e-06,1534,True,in top 10%,prior_expression
+basal_to_goblet,EHF,secondary,695.0,0.4530638852672751,-1.8854181213663883,0.3033485846427982,1534,False,not in top 10%,prior_expression
+basal_to_ciliated,FOXJ1,primary,1.0,0.000651890482398957,30.752741630423632,6.685982059882065e-92,1534,True,ok,prior_expression
+basal_to_ciliated,RFX2,secondary,5.0,0.003259452411994785,21.47476283779313,2.8370677054561407e-57,1534,True,in top 10%,prior_expression
+basal_to_ciliated,RFX3,secondary,3.0,0.001955671447196871,28.95921256821053,1.250120804587802e-76,1534,True,in top 10%,prior_expression
+basal_to_ciliated,TP73,secondary,34.0,0.02216427640156454,10.772866033882213,2.842652929086733e-15,1534,True,in top 10%,prior_expression
+basal_to_ciliated,MYB,secondary,186.0,0.121251629726206,6.314380643809628,0.0002753646397439,1534,False,not in top 10%,prior_expression
+basal_to_ciliated,E2F4,secondary,1279.0,0.833767926988266,-6.670928485361912,1.8584029003559372e-06,1534,False,not in top 10%,prior_expression
+basal_to_ciliated,GMNC,secondary,,,,,1534,False,not in top 10%,prior_expression
