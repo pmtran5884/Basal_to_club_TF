@@ -111,6 +111,7 @@ datasets:
   - id: hlca_core
     role: reference
     cellxgene_dataset_id: 066943a2-fdac-4b29-b348-40cede398e4e
+    cellxgene_collection_id: 6f6d381a-7701-4781-935c-db10d30de293
     source: cellxgene
     citation: "Sikkema et al., Nat Med 2023; doi 10.1038/s41591-023-02327-2"
     study: "An integrated cell atlas of the human lung in health and disease (core)"

@@ -150,3 +150,8 @@ direction for a basal → club transition and is not an artefact of unsigned edg
    SPDEF and FOXJ1, which have no binding-derived regulon.
 4. Add a second signature construction (trajectory-based, not endpoint contrast) so candidates can reach
    the top confidence tier, which requires agreement across constructions.
+
+> **Added 2026-09-10 after the class-definition arms run.** FOXA2's club rank is
+> definition-dependent: 5 (resolver, 10 studies), 8 (resolver, 4 studies), 77 (HLCA
+> `ann_finest_level` labels, same 4 studies). It is *not* a definition-robust club
+> candidate — see [docs/atlas_label_arms/ARM_COMPARISON.md](../atlas_label_arms/ARM_COMPARISON.md).

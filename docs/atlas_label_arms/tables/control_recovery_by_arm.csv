@@ -1,0 +1,16 @@
+,,nes,nes,rank,rank
+arm,,atlas_label,resolver,atlas_label,resolver
+contrast,tf,,,,
+basal_to_ciliated,E2F4,-17.73,-17.73,1523.0,1523.0
+basal_to_ciliated,FOXJ1,30.629,30.629,1.0,1.0
+basal_to_ciliated,MYB,12.996,12.996,40.0,40.0
+basal_to_ciliated,RFX2,27.528,27.528,5.0,5.0
+basal_to_ciliated,RFX3,28.721,28.721,3.0,3.0
+basal_to_ciliated,TP73,10.658,10.658,71.0,71.0
+basal_to_goblet,CREB3L1,3.895,5.333,118.0,26.0
+basal_to_goblet,CREB3L4,10.944,11.579,4.0,2.0
+basal_to_goblet,EHF,3.575,-1.956,143.0,681.0
+basal_to_goblet,ELF3,11.192,8.85,3.0,7.0
+basal_to_goblet,FOXA3,5.504,6.194,48.0,19.0
+basal_to_goblet,SPDEF,3.455,4.121,160.0,51.0
+basal_to_goblet,XBP1,8.143,9.438,10.0,4.0

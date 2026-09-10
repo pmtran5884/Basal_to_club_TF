@@ -1,0 +1,4 @@
+contrast,n_tf_shared,spearman_rho,top20_overlap,new_in_atlas_label_top20,lost_from_resolver_top20
+basal_to_club,1533,0.9730151221684528,16,"FOXA3,NCOA3,SATB2,THRB","DMRTA1,FOXA2,NFE2,ZNF69"
+basal_to_goblet,1534,0.9532107113638276,14,"NCOA2,NCOA3,RUNX1,SMAD4,STAT3,ZNF217","CREB3,CREB3L2,FOXA3,FOXP4,ZNF474,ZNF587"
+basal_to_ciliated,1534,1.0,20,,

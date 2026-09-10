@@ -1,0 +1,19 @@
+{
+ "atlas_label": [
+  "CREB3L2",
+  "ZNF587",
+  "THRB",
+  "FOXP4",
+  "FOXA3",
+  "MESP1"
+ ],
+ "resolver": [
+  "FOXA2",
+  "MESP1",
+  "DMRTA1",
+  "NFE2",
+  "ZNF69",
+  "NCOA2",
+  "SMAD4"
+ ]
+}

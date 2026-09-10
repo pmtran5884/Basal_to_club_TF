@@ -146,3 +146,12 @@ MIT.
   club/goblet resolver performance (leave-one-study-out), positive-control recovery, three-lineage driver
   comparison, and regulon evidence for the candidate basal to club drivers
 - `docs/qc_2026-09/run_tables/` — the run's result tables (`results/` itself is git-ignored)
+
+### Class-definition sensitivity (2026-09-10)
+
+- [docs/atlas_label_arms/ARM_COMPARISON.md](docs/atlas_label_arms/ARM_COMPARISON.md) —
+  re-run of VIPER with club/goblet taken from the HLCA's own `ann_finest_level` labels
+  instead of the marker resolver, on the four studies with enough cells in both classes.
+  Rankings correlate at rho 0.97 but 4 of the top 20 change; SPDEF recovery is *worse*
+  with the atlas labels; 11 TFs are club-preferential under all three definitions; FOXA2
+  is not one of them.
