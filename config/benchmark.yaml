@@ -1,0 +1,61 @@
+# FROZEN before any hyperparameter sweep. Do not edit to make a run pass.
+# Rationale in docs/DESIGN.md section 8.
+
+tf_universe: lambert_2018      # human TF census, intersected with detected genes
+
+gating:
+  # These decide whether the pipeline proceeds to the club prediction at all.
+  contrasts:
+    basal_to_goblet:
+      primary: SPDEF
+      secondary: [FOXA3, CREB3L1, XBP1, ELF3, EHF]
+      max_rank_percentile: 0.05
+      max_absolute_rank: 25
+    basal_to_ciliated:
+      primary: FOXJ1
+      secondary: [RFX2, RFX3, TP73, MYB, E2F4, GMNC]
+      max_rank_percentile: 0.05
+      max_absolute_rank: 25
+    basal_to_deuterosomal:
+      primary: MCIDAS
+      secondary: [FOXN4, MYB, E2F4, E2F5, GMNC]
+      max_rank_percentile: 0.10
+      max_absolute_rank: 50
+    basal_identity:
+      primary: TP63
+      secondary: [KLF5, SOX2, PAX9, TFAP2A]
+      max_rank_percentile: 0.10
+      max_absolute_rank: 50
+  requirements:
+    max_fdr: 0.05
+    require_positive_nes: true
+    min_ges_contrasts_passing: 2      # of 3
+    require_both_network_families: true
+    min_secondary_frac_in_top10pct: 0.5
+    # Discriminative test: a generic differentiation signal fails this.
+    specificity:
+      SPDEF: {must_rank_higher_in: basal_to_goblet, than_in: basal_to_club}
+      FOXJ1: {must_rank_higher_in: basal_to_ciliated, than_in: basal_to_club}
+
+reported_only:
+  # Scored and reported; NEVER gates, NEVER enters the sweep objective.
+  # Rare lineages: a miss is uninformative, a hit is positive evidence VIPER works at low n.
+  min_cells: 150
+  min_donors: 3
+  pooled_atlas_only: true
+  use_metacells: true
+  contrasts:
+    basal_to_ionocyte: {primary: FOXI1,  secondary: [ASCL3]}
+    basal_to_tuft:     {primary: POU2F3, secondary: [ASCL2, SPIB, GFI1B]}
+    basal_to_pnec:     {primary: ASCL1,  secondary: [NEUROD1, INSM1]}
+    basal_to_hillock:  {primary: KLF4,   secondary: [GRHL1, GRHL3, SOX15]}
+
+sweep:
+  objective: gating_recovery_score      # rare lineages excluded from this by construction
+  grid:
+    integrate.method: [scvi, harmony]
+    trajectory.metacells.cells_per_metacell: [50, 75, 100]
+    aracne.p_threshold: [1.0e-7, 1.0e-8]
+    regulon_filter.min_targets: [25, 50]
+    signature.contrasts: [[endpoint], [trajectory], [endpoint, trajectory, metacell]]
+  freeze_to: config/frozen.yaml

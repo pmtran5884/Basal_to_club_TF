@@ -1,0 +1,16 @@
+data/raw/
+data/interim/
+data/external/*
+!data/external/.gitkeep
+results/
+logs/
+.snakemake/
+*.h5ad
+*.h5
+*.gmt
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+config/frozen.yaml

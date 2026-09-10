@@ -1,0 +1,71 @@
+"""Basal_to_club_TF — top-level workflow.
+
+Build order is deliberate: the club prediction is the LAST thing computed, and
+`rule all` cannot reach it except through the benchmark gate.
+"""
+import yaml
+from pathlib import Path
+
+configfile: "config/params.yaml"
+
+DATASETS   = yaml.safe_load(open("config/datasets.yaml"))
+MARKERS    = yaml.safe_load(open("config/markers.yaml"))
+BENCH      = yaml.safe_load(open("config/benchmark.yaml"))
+REGULONS   = yaml.safe_load(open("config/regulons.yaml"))
+
+ATLAS_IDS  = [d["id"] for d in DATASETS["datasets"] if d["role"] == "atlas"]
+REF_IDS    = [d["id"] for d in DATASETS["datasets"] if d["role"] == "reference"]
+NETWORKS   = ([n["id"] for n in REGULONS["de_novo"]]
+              + [f"chea3_{lib}" for lib in REGULONS["prior"]["chea3"]["libraries"]]
+              + ["collectri"])
+GATING     = list(BENCH["gating"]["contrasts"])
+
+wildcard_constraints:
+    dataset="|".join(ATLAS_IDS + REF_IDS),
+    network="[A-Za-z0-9_.-]+",
+
+include: "rules/ingest.smk"
+include: "rules/qc.smk"
+include: "rules/integrate.smk"
+include: "rules/annotate.smk"
+include: "rules/secretory.smk"
+include: "rules/signature.smk"
+include: "rules/network.smk"
+include: "rules/viper.smk"
+include: "rules/benchmark.smk"
+include: "rules/sweep.smk"
+include: "rules/report.smk"
+
+
+rule all:
+    """Full run: atlas -> benchmark gate -> club prediction -> report."""
+    input:
+        "results/report/report.html",
+        "results/club/club_tf_ranking.csv",
+        "results/benchmark/benchmark_report.html",
+
+
+rule atlas:
+    """Stop after the annotated, resolver-corrected atlas. Useful during development."""
+    input:
+        "results/atlas/atlas_annotated.h5ad",
+        "results/secretory/resolver_holdout_metrics.json",
+
+
+rule benchmark_only:
+    """Stop after the positive-control benchmark. This is the decision point."""
+    input:
+        "results/benchmark/gate.json",
+        "results/benchmark/benchmark_report.html",
+
+
+rule sweep:
+    """Hyperparameter sweep, scored on gating contrasts only. Writes config/frozen.yaml."""
+    input:
+        "results/sweep/sweep_results.csv",
+    output:
+        "config/frozen.yaml",
+    log:
+        "logs/sweep_freeze.log",
+    script:
+        "../src/basal_to_club/benchmark/freeze.py"

@@ -1,0 +1,19 @@
+name: basal-to-club
+channels: [conda-forge, bioconda]
+dependencies:
+  - python=3.11
+  - snakemake-minimal>=8.0
+  - anndata>=0.10
+  - scanpy>=1.10
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - statsmodels
+  - matplotlib
+  - pyyaml
+  - pytables
+  - requests
+  - pytest
+  - pip
+  - pip: [pyviper]

@@ -1,0 +1,10 @@
+name: basal-to-club-integrate
+channels: [conda-forge, bioconda]
+dependencies:
+  - python=3.11
+  - scanpy>=1.10
+  - scvi-tools>=1.1
+  - harmonypy
+  - pytorch
+  - pip
+  - pip: [scib-metrics, SEACells]

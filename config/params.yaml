@@ -1,0 +1,109 @@
+seed: 0
+
+gene_annotation:
+  ensembl_release: 110
+  resolve_hgnc_aliases: true
+  drop_non_unique_mappings: true
+
+qc:
+  method: mad                 # adaptive per-sample thresholds, not global cutoffs
+  n_mads: 3
+  min_genes: 200
+  max_pct_mito: 20
+  ambient_correction: cellbender   # cellbender | soupx | none
+  doublets: scdblfinder
+  drop_nonepithelial: true
+
+integrate:
+  method: scvi                # scvi | harmony
+  batch_key: sample_id
+  categorical_covariates: [dataset_id, chemistry, system]
+  continuous_covariates: []
+  n_latent: 30
+  n_layers: 2
+  max_epochs: 400
+  leiden_resolution: 1.0
+  # Integration output is used for neighbours/clustering/label transfer ONLY.
+  # Signatures are always computed from raw counts within donor.
+
+annotate:
+  reference: hlca_core
+  transfer_method: scanvi     # via scarches surgery
+  min_transfer_confidence: 0.6
+  arbitration: modal_of_three # author label / transferred label / marker score
+
+secretory:
+  score_method: score_genes
+  threshold_method: gmm       # 2-component GMM fitted within dataset
+  min_component_separation: 2.0
+  goblet_vetoes_club: true
+  hybrid_class: true
+  remove_smg: true
+  remove_ciliated_contaminants: true
+  holdout_sample: GSM3439925  # in vivo bronchial biopsy, GSE121600
+  holdout_min_balanced_accuracy: 0.85
+
+trajectory:
+  root: basal
+  method: cellrank2
+  exclude_branches: [goblet, ionocyte, tuft, pnec]
+  metacells:
+    method: seacells
+    cells_per_metacell: 75
+    min_cells_per_donor: 300
+
+signature:
+  contrasts: [endpoint, trajectory, metacell]
+  pseudobulk:
+    aggregate: sum
+    group_by: [dataset_id, donor_id, cell_class]
+    min_cells_per_pseudobulk: 25
+    model: limma_voom          # donor blocked, dataset as covariate
+  zscore: true
+
+aracne:
+  implementation: aracne-ap
+  bootstraps: 100
+  p_threshold: 1.0e-8
+  dpi_tolerance: 0.0
+  min_metacell_detection_frac: 0.05
+  run_per_dataset: true
+  run_pooled: true
+
+regulon_filter:
+  min_targets: 25
+  max_targets: 500
+  min_likelihood: 0.0
+
+viper:
+  implementations: [pyviper, r_viper]
+  method: msviper              # msviper for pseudobulk contrasts
+  meta: true                   # metaVIPER across networks
+  null_model: sample_permutation
+  n_permutations: 1000
+  pleiotropy_correction: true  # shadow analysis
+  also_run: [narnea, decoupler_mlm, decoupler_ulm]
+
+robustness:
+  leave_one_dataset_out: true
+  leave_one_system_out: true
+  bootstrap_iterations: 20
+  bootstrap_frac: 0.8
+  null_regulon_shuffle: true
+
+# --- hyperparameter sweep -----------------------------------------------------
+# Scored on the GATING contrasts only (see docs/DECISIONS.md D11). The grid is
+# deliberately downstream of integration: everything swept here can be recomputed
+# from results/atlas/atlas_annotated.h5ad without re-integrating.
+sweep:
+  enabled: true
+  max_configs: 24            # refuse to run a grid larger than this
+  # One representative network per family. Sweeping all nine would multiply cost
+  # without changing which configuration wins - the sweep compares configurations,
+  # not networks, and the gate still requires BOTH families at full network depth.
+  networks: [aracne_pooled, collectri]
+  grid:
+    secretory.min_component_separation: [2.0, 2.5]
+    secretory.hybrid_class: [true, false]
+    signature.min_cells_per_pseudobulk: [15, 25]
+    viper.min_regulon_size: [20, 25, 30]

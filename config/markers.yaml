@@ -1,0 +1,45 @@
+# Cell-type identity markers and lineage-defining TFs.
+# ONE source of truth: annotate/ reads `markers`, benchmark/ reads `lineage_tfs`.
+# A marker panel and its control TF therefore cannot drift apart.
+
+markers:
+  basal:            [KRT5, TP63, KRT14, NGFR, DLK2, MIR205HG]
+  suprabasal:       [SERPINB3, NOTCH3, KRT13, SCGB1A1]      # KRT13 low, SCGB1A1 low
+  hillock:          [KRT13, KRT4, SPRR3, S100A2, ECM1]
+  club:             [SCGB1A1, SCGB3A1, SCGB3A2, BPIFA1, CYP2F1, WFDC2, KLK11, TSPAN8]
+  goblet:           [MUC5AC, TFF1, TFF3, S100P, CEACAM5, AGR2]
+  deuterosomal:     [DEUP1, CDC20B, CCNO, HES6, PLK4]
+  ciliated:         [FOXJ1, TPPP3, PIFO, CAPS, DNAI1, SNTN, RSPH1]
+  ionocyte:         [FOXI1, CFTR, ASCL3, ATP6V1G3, ATP6V0D2, TMEM61, CLCNKB]
+  tuft:             [POU2F3, AVIL, TRPM5, LRMP, SH2D6, BMX]
+  pnec:             [CHGA, CALCA, ASCL1, GRP, PCSK1N, SCG2]
+  smg_serous:       [LTF, LYZ, PRR4, ZG16B]
+  smg_mucous:       [MUC5B, BPIFB2, MUC19]
+  smg_myoepithelial: [TP63, ACTA2, KRT14, MYLK]
+  # non-epithelial gates for the first-pass filter
+  immune:           [PTPRC]
+  endothelial:      [PECAM1, CLDN5]
+  stromal:          [COL1A1, DCN, LUM]
+
+lineage_tfs:
+  basal:        {primary: TP63,    secondary: [KLF5, SOX2, PAX9, TFAP2A]}
+  suprabasal:   {primary: KLF4,    secondary: [KLF5, GRHL3, TFAP2A]}
+  hillock:      {primary: KLF4,    secondary: [GRHL1, GRHL3, SOX15]}
+  goblet:       {primary: SPDEF,   secondary: [FOXA3, CREB3L1, XBP1, ELF3, EHF]}
+  deuterosomal: {primary: MCIDAS,  secondary: [FOXN4, MYB, E2F4, E2F5, GMNC]}
+  ciliated:     {primary: FOXJ1,   secondary: [RFX2, RFX3, TP73, MYB, E2F4, GMNC]}
+  ionocyte:     {primary: FOXI1,   secondary: [ASCL3]}
+  tuft:         {primary: POU2F3,  secondary: [ASCL2, SPIB, GFI1B]}
+  pnec:         {primary: ASCL1,   secondary: [NEUROD1, INSM1]}
+
+# NOT a benchmark entry. Used only to annotate the final club table for the reader.
+# Deliberately excluded from the sweep objective: tuning on these would make the result circular.
+club_prior_plausible: [NKX2-1, NKX2_1, FOXA2, SOX2, CEBPA, CEBPB, CEBPD, ELF3, EHF, XBP1, CREB3L1, HES1, HEY1]
+
+# Genes barred from the club/goblet discriminant panels.
+ambiguous_genes:
+  MUC5B: >-
+    Expressed by club cells, goblet cells and submucosal gland mucous cells in human
+    proximal airway. Descriptive covariate only; never a discriminant.
+  SCGB3A1: >-
+    Club-enriched but also present in SMG. Kept in the club panel only after SMG removal.

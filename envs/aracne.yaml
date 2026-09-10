@@ -1,0 +1,11 @@
+name: basal-to-club-aracne
+channels: [conda-forge, bioconda]
+dependencies:
+  - openjdk>=11
+  - python=3.11
+  - pandas
+  - scanpy
+# ARACNe-AP is not on conda: build the jar from
+# https://github.com/califano-lab/ARACNe-AP and place it on PATH as aracne.jar,
+# or set `aracne_jar` in config/params.yaml. The build is recorded in
+# results/provenance/ so a run stays reproducible.

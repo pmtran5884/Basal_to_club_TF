@@ -1,0 +1,50 @@
+# Regulon sources. The interface is identical regardless of provenance:
+#   (tf, target, mode_of_regulation in [-1,1], likelihood in [0,1])
+# That contract is what lets an ATAC- or CUT&RUN-derived network drop in later (v2)
+# without touching the VIPER, benchmark or reporting modules.
+
+de_novo:
+  - id: aracne_pooled
+    family: de_novo
+    input: results/metacells/atlas_metacells.h5ad
+    scope: pooled
+  - id: aracne_per_dataset
+    family: de_novo
+    input: results/metacells/atlas_metacells.h5ad
+    scope: per_dataset          # one network per dataset -> metaVIPER inputs
+
+prior:
+  # ChEA3 libraries are unsigned gene-set libraries. The converter assigns
+  # mode of regulation from TF-target Spearman correlation in the airway metacells,
+  # and likelihood from cross-library support x |rho|.
+  # Confirm the current library set/version at build time and record it in provenance.
+  chea3:
+    base_url: "https://maayanlab.cloud/chea3/assets/tflibs"
+    libraries:
+      - ENCODE_ChIP-seq
+      - ReMap_ChIP-seq
+      - Literature_ChIP-seq
+      - ARCHS4_Coexpression
+      - GTEx_Coexpression
+      - Enrichr_Queries
+    keep_separate: true          # separate metaVIPER inputs, not one merged edge bag
+    sign_source: metacell_spearman
+    min_abs_rho: 0.10            # below this: edge kept, likelihood 0 (present, uninformative)
+  collectri:
+    via: decoupler               # pre-signed; used to audit the sign-assignment heuristic
+    organism: human
+  chea_kg:
+    url: "https://chea-kg.maayanlab.cloud"
+    use_for: tf_tf_hierarchy_only   # NOT a primary regulon source
+
+network_qc:
+  # A network that fails these is not used. Cheap, and catches a broken build early.
+  required_regulon_sanity:
+    FOXJ1: {must_contain_any: [TPPP3, PIFO, DNAI1, RSPH1, CAPS], min_hits: 2}
+    SPDEF: {must_contain_any: [MUC5AC, TFF1, TFF3, AGR2], min_hits: 2}
+    TP63:  {must_contain_any: [KRT5, KRT14, NGFR], min_hits: 1}
+  report: [n_tfs, median_regulon_size, edge_jaccard_vs_other_networks]
+
+provenance:
+  record: [download_date, url, sha256, n_edges, n_tfs]
+  path: results/provenance/

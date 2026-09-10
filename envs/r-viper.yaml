@@ -1,0 +1,10 @@
+name: basal-to-club-r
+channels: [conda-forge, bioconda]
+dependencies:
+  - r-base>=4.3
+  - bioconductor-viper
+  - bioconductor-limma
+  - bioconductor-edger
+  - r-data.table
+  - rpy2
+  - python=3.11

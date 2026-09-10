@@ -1,0 +1,129 @@
+# Dataset registry for Basal_to_club_TF.
+# Confirmed minimal set. Every accession verified against GEO / CELLxGENE (see docs/DATASETS.md).
+# role: atlas   -> merged into the aggregated atlas
+# role: reference -> label-transfer anchor only, never merged
+# role: holdout -> withheld from annotation; used to validate the club/goblet resolver
+
+datasets:
+
+  - id: deprez_2020
+    role: atlas
+    accession: GSE143868
+    source: geo
+    citation: "Deprez et al., Am J Respir Crit Care Med 2020; PMID 32726565"
+    study: "Single cell RNA-seq mapping of nasal and tracheobronchial airways in human healthy volunteers"
+    n_samples: 35
+    reported_cells: 77969
+    system: in_vivo
+    sampling: [brush, forceps_biopsy]
+    tissue: proximal_to_distal_airway     # nose -> 12th division
+    chemistry: 10x
+    disease_filter: [healthy]
+    trust_labels: true
+    label_granularity: fine
+    covariates: [airway_position, donor_id, sampling]
+    notes: >-
+      Positional series. airway_position is real biology and must enter the model as a
+      covariate; nasal locations are flagged, never silently pooled with bronchial.
+
+  - id: goldfarbmuren_2020
+    role: atlas
+    accession: GSE134174
+    source: geo
+    citation: "Goldfarbmuren et al., Nat Commun 2020; PMID 32427931"
+    study: "Dissecting the cellular specificity of smoking effects and reconstructing lineages in the human airway epithelium"
+    n_samples: 28
+    system: in_vivo
+    sampling: [brush]
+    tissue: trachea
+    chemistry: 10x
+    disease_filter: [nonsmoker]           # smokers retained only for the sensitivity arm
+    trust_labels: true
+    label_granularity: fine
+    covariates: [smoking_status, donor_id]
+
+  - id: ruizgarcia_2019
+    role: atlas
+    accession: GSE121600
+    source: geo
+    citation: "Ruiz Garcia et al., Development 2019; PMID 31558434"
+    study: "Single-cell RNA-seq reveals novel cell differentiation dynamics during human airway epithelium regeneration"
+    n_samples: 22                          # 18 human; mouse + pig excluded below
+    system: mixed                          # in vitro ALI time course + matched in vivo
+    tissue: airway_epithelium
+    chemistry: 10x
+    trust_labels: true
+    label_granularity: fine
+    ground_truth: true
+    covariates: [media, ali_day, donor_id]
+    exclude_samples: [GSM3439924, GSM3439928]   # mouse tracheal ALI d3; pig trachea
+    samples:
+      # BEGM ALI time course
+      GSM3439913: {system: ali, media: BEGM,       ali_day: 2}
+      GSM3439914: {system: ali, media: BEGM,       ali_day: 4}
+      GSM3439915: {system: ali, media: BEGM,       ali_day: 7}
+      GSM3439916: {system: ali, media: BEGM,       ali_day: 12}
+      GSM3439917: {system: ali, media: BEGM,       ali_day: 17}
+      GSM3439918: {system: ali, media: BEGM,       ali_day: 22}
+      GSM3439919: {system: ali, media: BEGM,       ali_day: 62}
+      # PneumaCult ALI time course
+      GSM3439920: {system: ali, media: PneumaCult, ali_day: 7}
+      GSM3439921: {system: ali, media: PneumaCult, ali_day: 12}
+      GSM3439922: {system: ali, media: PneumaCult, ali_day: 28}
+      GSM3439923: {system: ali, media: PneumaCult, ali_day: 47}
+      # additional donors
+      GSM4080085: {system: ali, media: BEGM,       ali_day: 31, donor_id: D395}
+      GSM4080086: {system: ali, media: PneumaCult, ali_day: 26, donor_id: D395}
+      GSM4080087: {system: ali, media: PneumaCult, ali_day: 28, donor_id: D389}
+      GSM4080088: {system: ali, media: BEGM,       ali_day: 14, donor_id: D252}
+      GSM4080089: {system: ali, media: BEGM,       ali_day: 14, donor_id: D266}
+      GSM4080090: {system: ali, media: BEGM,       ali_day: 14, donor_id: D267}
+      # matched in vivo
+      GSM3439925: {system: in_vivo, tissue: bronchial_biopsy, role: holdout}
+      GSM3439926: {system: in_vivo, tissue: nasal_brushing}
+      GSM3439927: {system: in_vivo, tissue: nasal_turbinate}
+    notes: >-
+      Ground truth for both the differentiation trajectory (real ALI time, not pseudotime)
+      and the club/goblet resolver. GSM3439925 (in vivo bronchial biopsy) is the designated
+      resolver holdout. Media is a covariate with a mandatory per-medium sensitivity run:
+      BEGM and PneumaCult give different secretory composition.
+
+  - id: ravindra_2021
+    role: atlas
+    accession: GSE166766
+    cellxgene_dataset_id: 030faa69-ff79-4d85-8630-7c874a114c19
+    source: cellxgene                       # curated h5ad preferred over reprocessing raw
+    citation: "Ravindra et al., PLoS Biol 2021; PMID 33730024; doi 10.1371/journal.pbio.3001143"
+    study: "Single-cell longitudinal analysis of SARS-CoV-2 infection in human bronchial epithelium"
+    reported_cells: 77650
+    system: ali
+    tissue: bronchial_epithelium
+    chemistry: 10x
+    disease_filter: [mock]                  # HARD FILTER - see notes
+    trust_labels: true
+    label_granularity: fine
+    covariates: [timepoint, donor_id]
+    notes: >-
+      The genuinely bronchial ALI set. Mock/uninfected cells ONLY: infected cells carry an
+      interferon program that will dominate any differential signature. The infection filter
+      is asserted at load time, not left to a downstream subset.
+
+  - id: hlca_core
+    role: reference
+    cellxgene_dataset_id: 066943a2-fdac-4b29-b348-40cede398e4e
+    source: cellxgene
+    citation: "Sikkema et al., Nat Med 2023; doi 10.1038/s41591-023-02327-2"
+    study: "An integrated cell atlas of the human lung in health and disease (core)"
+    reported_cells: 584944
+    system: reference
+    trust_labels: true
+    label_granularity: fine
+    notes: >-
+      scArches/scANVI label-transfer anchor. Never merged into the atlas as a batch.
+
+# Excluded by default, with reasons - kept here so the exclusions are auditable.
+excluded:
+  - {pattern: "distal/alveolar-only", reason: "no basal->club transition of interest"}
+  - {pattern: "nasal-only studies", reason: "different secretory composition; allowed only inside a proximo-distal series, and then flagged"}
+  - {pattern: "infected / cytokine-stimulated arms", reason: "IFN and IL-13 programs dominate differential signatures"}
+  - {pattern: "whole-lung with negligible proximal airway", reason: "contributes batch effect without contributing target cells"}
