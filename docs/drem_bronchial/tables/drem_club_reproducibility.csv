@@ -1,0 +1,3 @@
+comparison,mean_spearman,mean_top20_overlap
+"within-donor, across label arm",0.835,17.0
+across donor,0.493,7.0

@@ -8,6 +8,7 @@ writes from its per-split logistic regression, are the fallback.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -17,7 +18,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from basal_to_club.drem import parse as DP  # noqa: E402
 
-OUT = ROOT / "results/drem_ali"
+# Which time course to model: "drem_ali" (nasal, GSE121600) or "drem_bronchial"
+# (GSE233145). Both prep scripts write ali.h5ad + cell_classes.csv into their
+# own results dir, so the grid code is identical for the two datasets.
+OUT = ROOT / "results" / os.environ.get("BTC_DREM_SET", "drem_ali")
 
 
 def main():

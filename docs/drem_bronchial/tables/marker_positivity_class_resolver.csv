@@ -1,0 +1,7 @@
+class,n_cells,pct_KRT5+,pct_SCGB1A1+,pct_MUC5AC+,pct_MUC5B+,pct_FOXJ1+
+basal,55654,49.7,25.9,0.2,0.3,0.9
+ciliated,6674,29.1,59.5,0.4,1.0,14.3
+club,1812,27.2,80.9,0.2,1.4,1.7
+goblet,4462,30.1,29.2,0.4,0.6,0.9
+hybrid,2162,25.3,82.2,1.9,4.4,1.3
+secretory_unassigned,6950,35.9,26.0,0.1,0.2,1.1

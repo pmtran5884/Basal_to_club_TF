@@ -12,6 +12,7 @@ branch. Lower is stronger. This is the DREM analogue of a positive VIPER NES.
 from __future__ import annotations
 
 import json
+import os
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -28,7 +29,10 @@ from basal_to_club.drem import parse as DP    # noqa: E402
 from basal_to_club.drem import run as DR      # noqa: E402
 from basal_to_club.network import prior as PRIOR  # noqa: E402
 
-OUT = ROOT / "results/drem_ali"
+# Which time course to model: "drem_ali" (nasal, GSE121600) or "drem_bronchial"
+# (GSE233145). Both prep scripts write ali.h5ad + cell_classes.csv into their
+# own results dir, so the grid code is identical for the two datasets.
+OUT = ROOT / "results" / os.environ.get("BTC_DREM_SET", "drem_ali")
 CHEA = ROOT / "data/external/chea3"
 JAR = ROOT.parent / "external/STEM_DREM/drem.jar"
 CLASSES = ROOT.parent / "external/STEM_DREM/patched"
@@ -41,6 +45,10 @@ FAMILIES = {
 ARMS = {"atlas_label": "class_atlas", "resolver": "class_resolver"}
 LINEAGES = ["club", "goblet", "ciliated", "all"]
 MIN_CELLS_PER_DAY = 20
+# DREM's path search grows steeply with the number of sampled time points, so a
+# dense course can be thinned to a representative grid via BTC_DREM_DAYS.
+DAY_SUBSET = ({int(x) for x in os.environ["BTC_DREM_DAYS"].split(",")}
+              if os.environ.get("BTC_DREM_DAYS") else None)
 MIN_DAYS = 3
 MAX_TARGETS_PER_TF = 1000
 MIN_TARGETS_PER_TF = 15
@@ -59,6 +67,8 @@ def build_series(ad, cls: pd.Series, donor: str, lineage: str):
     sub = ad[keep]
     rows, counts = {}, []
     for day in sorted(sub.obs.day.unique()):
+        if DAY_SUBSET is not None and int(day) not in DAY_SUBSET:
+            continue
         cell = sub.obs.day.values == day
         n_lin = int((cls.loc[sub.obs_names[cell]] == lineage).sum()) if lineage != "all" else int(cell.sum())
         if cell.sum() < MIN_CELLS_PER_DAY:
@@ -141,6 +151,7 @@ def main():
     ad = sc.read_h5ad(OUT / "ali.h5ad")
     cls_tbl = pd.read_csv(OUT / "cell_classes.csv", index_col=0)
     log(f"{ad.n_obs} cells; donors {sorted(ad.obs.donor.unique())}")
+    log(f"day grid: {sorted(DAY_SUBSET) if DAY_SUBSET else 'all sampled days'}")
 
     # ---- series first, so the regulon universe is the expressed gene set ----
     series, counts = {}, []

@@ -7,6 +7,7 @@ DREM class: refitting the whole grid is hours of compute for one cell.
 """
 from __future__ import annotations
 
+import os
 import sys
 import time
 from pathlib import Path
@@ -20,7 +21,8 @@ CLASSES = ROOT.parent / "external/STEM_DREM/patched"
 
 
 def main(arm, donor, lineage, family):
-    d = ROOT / "results/drem_ali/models" / arm / donor / lineage / family
+    d = (ROOT / "results" / os.environ.get("BTC_DREM_SET", "drem_ali")
+         / "models" / arm / donor / lineage / family)
     assert (d / "settings.txt").exists(), f"no prepared inputs in {d}"
     for f in (d / "tfscores").glob("*.txt"):
         f.unlink()

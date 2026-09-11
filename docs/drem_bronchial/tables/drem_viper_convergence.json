@@ -1,0 +1,14 @@
+{
+ "drem_set": "drem_bronchial",
+ "n_viper_robust": 11,
+ "n_viper_in_drem": 6,
+ "median_pct_viper_set": 0.492,
+ "median_pct_background": 0.501,
+ "n_obs_viper": 24,
+ "n_obs_background": 3076,
+ "U": 34420.0,
+ "p": 0.28419312090028254,
+ "n_drem_club_specific": 0,
+ "drem_club_specific": [],
+ "overlap_with_viper": []
+}

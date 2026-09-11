@@ -158,12 +158,23 @@ def classify(scores: pd.DataFrame, thr: ResolverThresholds,
 
 
 def score_programs(adata, markers: dict[str, list[str]], alias_map=None,
-                   score_method: str = "score_genes") -> pd.DataFrame:
+                   score_method: str = "score_genes",
+                   optional_programs: tuple[str, ...] = ()) -> pd.DataFrame:
     """Score the four programs the resolver needs, on log-normalized data.
 
     SMG is scored as the max of the serous and mucous panels: either one is
     sufficient grounds for exclusion, and averaging them would let a strongly
     serous cell slip through.
+
+    `optional_programs` names programs that may be dropped when the matrix
+    cannot measure them, instead of raising. This exists for one situation:
+    an in-vitro culture derived from expanded basal cells contains no
+    submucosal gland cells, so on a shallow platform that never captured
+    BPIFB2/MUC19 the SMG veto is unmeasurable *and* biologically vacuous.
+    A dropped program scores -inf, so its threshold can never fire, and the
+    drop is recorded in `df.attrs["dropped_programs"]` rather than being
+    silent. Passing "club" or "goblet" here would disable the resolver's
+    actual job and is refused.
     """
     import scanpy as sc
 
@@ -176,22 +187,38 @@ def score_programs(adata, markers: dict[str, list[str]], alias_map=None,
         "smg_serous": markers["smg_serous"],
         "smg_mucous": markers["smg_mucous"],
     }
-    scores = {}
+    bad = set(optional_programs) & {"club", "goblet"}
+    if bad:
+        raise ValueError(f"programs {sorted(bad)} are what the resolver decides; "
+                         "they cannot be optional")
+    panel_program = {"club": "club", "goblet": "goblet", "ciliated": "ciliated",
+                     "smg_serous": "smg", "smg_mucous": "smg"}
+    scores, dropped = {}, []
     for name, panel in panels.items():
-        genes = require_panel(name, [g for g in panel if g != "MUC5B"],
-                              adata.var_names, alias_map=alias_map)
+        try:
+            genes = require_panel(name, [g for g in panel if g != "MUC5B"],
+                                  adata.var_names, alias_map=alias_map)
+        except ValueError:
+            if panel_program[name] not in optional_programs:
+                raise
+            dropped.append(name)
+            scores[name] = pd.Series(-np.inf, index=adata.obs_names)
+            continue
         sc.tl.score_genes(adata, genes, score_name=f"_score_{name}", use_raw=False)
         scores[name] = adata.obs.pop(f"_score_{name}")
 
     df = pd.DataFrame(scores, index=adata.obs_names)
     df["smg"] = df[["smg_serous", "smg_mucous"]].max(axis=1)
-    return df[["club", "goblet", "ciliated", "smg"]]
+    out = df[["club", "goblet", "ciliated", "smg"]]
+    out.attrs["dropped_programs"] = dropped
+    return out
 
 
 def resolve_secretory(adata, markers: dict, params: dict, dataset_key: str = "dataset_id"):
     """Full resolver: score -> fit per dataset -> classify. Returns (assignments, thresholds)."""
     sec = params["secretory"]
-    scores = score_programs(adata, markers, score_method=sec.get("score_method", "score_genes"))
+    scores = score_programs(adata, markers, score_method=sec.get("score_method", "score_genes"),
+                            optional_programs=tuple(sec.get("optional_programs", ())))
     assignments, fitted = [], {}
     for ds, idx in adata.obs.groupby(dataset_key, observed=True).groups.items():
         sub = scores.loc[idx]
@@ -201,6 +228,7 @@ def resolve_secretory(adata, markers: dict, params: dict, dataset_key: str = "da
                                     goblet_vetoes_club=sec.get("goblet_vetoes_club", True),
                                     hybrid_class=sec.get("hybrid_class", True)))
     out = pd.concat(assignments).reindex(adata.obs_names)
+    fitted["_dropped_programs"] = scores.attrs.get("dropped_programs", [])
     return pd.DataFrame({"cell_class": out}).join(scores), fitted
 
 

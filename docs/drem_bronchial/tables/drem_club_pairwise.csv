@@ -1,0 +1,7 @@
+pair,same_donor,spearman,overlap_top20
+atlas_Donor_1 vs atlas_Donor_2,False,0.567,10
+atlas_Donor_1 vs resol_Donor_1,True,0.765,14
+atlas_Donor_1 vs resol_Donor_2,False,0.563,10
+atlas_Donor_2 vs resol_Donor_1,False,0.426,4
+atlas_Donor_2 vs resol_Donor_2,True,0.905,20
+resol_Donor_1 vs resol_Donor_2,False,0.415,4

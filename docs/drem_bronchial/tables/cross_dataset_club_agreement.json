@@ -1,0 +1,12 @@
+{
+ "spearman_cross_dataset": 0.374,
+ "n_shared_tfs": 570,
+ "consensus_top_decile_both": [
+  "FOXM1",
+  "MYBL2",
+  "PAX9",
+  "TFDP1",
+  "ZBTB7C"
+ ],
+ "top20_overlap": 2
+}
