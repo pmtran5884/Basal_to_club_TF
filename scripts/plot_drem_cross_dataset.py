@@ -71,11 +71,9 @@ def main():
         ax.annotate("top 10%", (0.115, -0.55), fontsize=6, color=GREY)
         ax.set_yticks(y); ax.set_yticklabels([t for _, t in idx], fontstyle="italic")
         ax.invert_yaxis(); ax.set_xlim(-0.03, 1.03)
-        ax.set_xlabel("best rank percentile across the 4 models (lower = stronger)")
         ax.set_title("Lineage control TFs recover in both tissues, except goblet")
-        ax.scatter([], [], s=24, facecolor="white", edgecolor=GREY, lw=1.1, label="nasal")
-        ax.scatter([], [], s=26, color=GREY, label="bronchial")
-        ax.legend(frameon=False, loc="lower left", handletextpad=0.4)
+        ax.set_xlabel("best rank percentile across the 4 models "
+                      "(open = nasal, filled = bronchial; lower = stronger)")
         for lin, c in LINCOL.items():
             ii = [i for i, k in enumerate(idx) if k[0] == lin]
             ax.annotate(lin, (1.0, np.mean(ii)), color=c, fontsize=7, ha="right", va="center")
