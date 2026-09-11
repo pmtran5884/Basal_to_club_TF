@@ -155,3 +155,30 @@ MIT.
   Rankings correlate at rho 0.97 but 4 of the top 20 change; SPDEF recovery is *worse*
   with the atlas labels; 11 TFs are club-preferential under all three definitions; FOXA2
   is not one of them.
+
+### Orthogonal time-course check with DREM (2026-09-11)
+
+VIPER scores static cell states; DREM ([Ernst et al. 2007](https://doi.org/10.1038/msb4100115))
+fits regulator-annotated bifurcations to an actual differentiation time course. Both arms use
+the same ChEA3-derived regulons, so the comparison tests the *evidence* rather than the network.
+
+- [docs/drem_ali/DREM_COMPARISON.md](docs/drem_ali/DREM_COMPARISON.md) — nasal ALI course
+  (GSE121600, 10x, donors D246/D275, days 2-22)
+- [docs/drem_bronchial/DREM_COMPARISON.md](docs/drem_bronchial/DREM_COMPARISON.md) +
+  [METHODS.md](docs/drem_bronchial/METHODS.md) — bronchial ALI course (GSE233145, primary HBEC,
+  Drop-seq, donors Donor_1/Donor_2, days 0-28), an independent replication in the
+  tissue this repository is actually about
+
+Both courses agree: the *ciliated* positive control is recovered at rank 1-3 of ~800 TFs in every
+model (*FOXJ1*, with *RFX2/RFX3/TP73* behind it); goblet control recovery is set by sequencing
+depth (nasal 10x recovers *SPDEF* at percentile 0.04, bronchial Drop-seq does not, at 0.4%
+*MUC5AC*+ cells); club rankings are reproducible within donor across label arms
+(rho 0.83 bronchial / 0.63 nasal) but not across donors (0.49 / 0.23); and **neither course
+corroborates the static VIPER club-specific set** (median-ranked, p = 0.28 / 0.30). The club TFs
+reproducible in both tissues are *FOXM1*, *MYBL2*, *TFDP1*, *PAX9*, *ZBTB7C* — three of them
+cell-cycle regulators.
+
+Scripts: `scripts/prep_drem_bronchial.py`, `scripts/run_drem_ali.py` (both sets, via
+`BTC_DREM_SET`), `scripts/collect_drem_ali.py`, `scripts/compare_drem_viper.py`,
+`scripts/plot_drem_cross_dataset.py`. DREM is vendored and patched in `external/STEM_DREM/`
+(three null-pointer guards needed for batch mode; see `docs/drem_ali/DREM_COMPARISON.md`).

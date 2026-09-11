@@ -23,7 +23,7 @@ python scripts/plot_drem_cross_dataset.py
   expresses): basal r = 0.92, ciliated r = 0.96, secretory r = 0.82; mean absolute
   error 0.057-0.066 of a sample. HLCA transfer held-out accuracy 0.881.
 * **Direction of differentiation**: basal falls (0.83 -> 0.47 / 0.62 by day 28),
-  ciliated rises from ~0 to 0.36 / 0.21, in both donors.
+  ciliated rises from ~0 to 0.36 / 0.20, in both donors.
 * **Marker positivity by called class**: club calls are 80.9% *SCGB1A1*+ against
   25.9% in basal; ciliated calls are 14.3% *FOXJ1*+ against 0.9% in basal.
 * **Goblet calls are not supported at this depth**: 0.4% *MUC5AC*+, 0.6% *MUC5B*+.
