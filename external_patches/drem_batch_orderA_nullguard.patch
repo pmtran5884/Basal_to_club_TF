@@ -1,0 +1,64 @@
+diff --git a/edu/cmu/cs/sb/drem/DREM_IO_Batch.java b/edu/cmu/cs/sb/drem/DREM_IO_Batch.java
+index 2be5e73..d12c602 100644
+--- a/edu/cmu/cs/sb/drem/DREM_IO_Batch.java
++++ b/edu/cmu/cs/sb/drem/DREM_IO_Batch.java
+@@ -1348,7 +1348,7 @@ public class DREM_IO_Batch {
+ 		for (int ni = 0; ni < theTreeNode.nextptr.length ; ni++)
+ 		{
+ 		    /*
+-		    if (theTreeNode.numchildren == 2)
++		    if (theTreeNode.numchildren == 2 && theTreeNode.dpvals != null)
+ 		    {
+ 			PrintWriter pw = new PrintWriter(szTFDIR+"/edgesplit_"+theTreeNode.dmean+"_"+theTreeNode.dsigma+"_"+ndepth+"_0.txt");
+ 			pw.println("TF\tscore");
+@@ -1418,7 +1418,7 @@ public class DREM_IO_Batch {
+ 
+ 		for (int ni = 0; ni < theTreeNode.nextptr.length ; ni++)
+ 		{
+-		    if (theTreeNode.numchildren == 2)
++		    if (theTreeNode.numchildren == 2 && theTreeNode.dpvals != null)
+ 		    {
+ 			PrintWriter pw = new PrintWriter(szTFDIR+"/split_"+ndepth+"_"+nf3.format(theTreeNode.dmean)+"_"+nf3.format(theTreeNode.dsigma)+"_2way.txt");
+ 
+@@ -1444,16 +1444,38 @@ public class DREM_IO_Batch {
+ 			}
+ 			pw.close();
+ 		    }
+-		    else if (theTreeNode.numchildren >= 3)
++		    else if (theTreeNode.numchildren >= 3 && theTreeNode.dpvals != null)
+ 		    {
++			// orderA is populated by the interactive viewer only; in batch mode
++			// it is null and printSplitTables throws. Order children by mean.
++			int[] orderA = theTreeNode.orderA;
++			if (orderA == null)
++			{
++			    orderA = new int[theTreeNode.numchildren];
++			    boolean[] used = new boolean[theTreeNode.numchildren];
++			    for (int nx = 0; nx < theTreeNode.numchildren; nx++)
++			    {
++				int nbest = -1;
++				for (int ny = 0; ny < theTreeNode.numchildren; ny++)
++				{
++				    if (!used[ny] && (nbest == -1 ||
++					theTreeNode.nextptr[ny].dmean > theTreeNode.nextptr[nbest].dmean))
++				    {
++					nbest = ny;
++				    }
++				}
++				used[nbest] = true;
++				orderA[nx] = nbest;
++			    }
++			}
+ 			for (int na = 0; na < theTreeNode.numchildren; na++)
+ 			{
+ 			    PrintWriter pw = new PrintWriter(szTFDIR+"/split_"+ndepth+"_"+nf3.format(theTreeNode.dmean)+"_"+nf3.format(theTreeNode.dsigma)+"_to_"+
+-							     nf3.format(theTreeNode.nextptr[theTreeNode.orderA[na]].dmean)+"_"+nf3.format(theTreeNode.nextptr[theTreeNode.orderA[na]].dsigma)+"_vsOthers.txt");
++							     nf3.format(theTreeNode.nextptr[orderA[na]].dmean)+"_"+nf3.format(theTreeNode.nextptr[orderA[na]].dsigma)+"_vsOthers.txt");
+ 
+ 
+ 			    String[] columnNames = DREMGui_SplitTable.splitTableColumnNamesGreater2WAY(ftimehmm, theTreeNode, na);
+-			    String[][] tableData = DREMGui_SplitTable.splitTableTableDataGreater2WAY(ftimehmm, theTreeNode, theTreeNode.orderA[na], columnNames);
++			    String[][] tableData = DREMGui_SplitTable.splitTableTableDataGreater2WAY(ftimehmm, theTreeNode, orderA[na], columnNames);
+ 			    //pw.println("TF\tDiff. Split\tscore");
+ 
+ 			    pw.print(columnNames[0]);
