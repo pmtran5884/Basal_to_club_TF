@@ -13,7 +13,7 @@ atlas_label,D275,ciliated,binding,True,True,path_tables,23,22,210
 atlas_label,D275,ciliated,coexpression,True,True,path_tables,33,30,613
 atlas_label,D275,club,binding,True,True,path_tables,18,18,210
 atlas_label,D275,club,coexpression,True,True,path_tables,26,22,613
-atlas_label,D275,goblet,binding,True,False,split_tables,0,0,0
+atlas_label,D275,goblet,binding,True,True,path_tables,28,26,209
 atlas_label,D275,goblet,coexpression,True,True,path_tables,26,25,613
 resolver,D246,all,binding,True,True,path_tables,53,40,209
 resolver,D246,all,coexpression,True,True,path_tables,47,37,613

@@ -25,8 +25,9 @@ appears in one of them is a method-dependent call, not a consensus driver.
   210 and 613 TFs respectively. An unexpressed TF cannot be driving the culture
   and every extra TF is one more covariate in DREM's per-split regression.
 * 2 arms x 2 donors x 4 lineages x 2 families = 32 models, all fitted
-  (`tables/drem_runs.csv`); 30 produced path (edge) tables, 1 fell back to split
-  tables, 1 is a refit.
+  (`tables/drem_runs.csv`); 31 produced path (edge) tables and 1
+  (atlas label / D246 / club / coexpression) crashed partway through the writer
+  after 8.3 h and is scored from its split tables.
 
 ## Result 1 -- the ciliated control is recovered crisply; goblet partially
 
@@ -94,7 +95,7 @@ intersection is empty at any defensible threshold.
 
 ## Patches to DREM
 
-DREM's batch writer crashes twice on these models; both are null dereferences on
+DREM's batch writer crashes three ways on these models, all null dereferences on
 state the interactive viewer fills in and batch mode does not. The single-class
 source patch is in `external_patches/drem_batch_orderA_nullguard.patch` and is
 compiled ahead of the shipped jar on the classpath (`basal_to_club.drem.run`,
@@ -105,6 +106,8 @@ compiled ahead of the shipped jar on the classpath (`basal_to_club.drem.run`,
 2. `theTreeNode.dpvals` (per-node regulator p-values) is null at nodes where no
    regression was fit; the split-table writers dereference it. The table is now
    skipped for such a node and the recursion continues.
+3. `theTreeNode.ncountvals` (per-node bound/unbound target counts) is null at the
+   same nodes and is dereferenced by the path/edge-table writer; same treatment.
 
 `basal_to_club.drem.parse` prefers path tables and falls back to split tables, so
 a model that crashes partway still yields a ranking from whatever DREM wrote.

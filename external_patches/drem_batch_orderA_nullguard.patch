@@ -1,5 +1,5 @@
 diff --git a/edu/cmu/cs/sb/drem/DREM_IO_Batch.java b/edu/cmu/cs/sb/drem/DREM_IO_Batch.java
-index 2be5e73..d12c602 100644
+index 2be5e73..00fc036 100644
 --- a/edu/cmu/cs/sb/drem/DREM_IO_Batch.java
 +++ b/edu/cmu/cs/sb/drem/DREM_IO_Batch.java
 @@ -1348,7 +1348,7 @@ public class DREM_IO_Batch {
@@ -11,6 +11,15 @@ index 2be5e73..d12c602 100644
  		    {
  			PrintWriter pw = new PrintWriter(szTFDIR+"/edgesplit_"+theTreeNode.dmean+"_"+theTreeNode.dsigma+"_"+ndepth+"_0.txt");
  			pw.println("TF\tscore");
+@@ -1359,7 +1359,7 @@ public class DREM_IO_Batch {
+ 		       pw.close();
+ 		    }
+ 		    */
+-		    if (theTreeNode.numchildren >= 2)
++		    if (theTreeNode.numchildren >= 2 && theTreeNode.ncountvals != null)
+ 		    {		    
+ 			for (int na = 0; na < theTreeNode.numchildren; na++)
+ 			{
 @@ -1418,7 +1418,7 @@ public class DREM_IO_Batch {
  
  		for (int ni = 0; ni < theTreeNode.nextptr.length ; ni++)
