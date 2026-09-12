@@ -1,0 +1,13 @@
+dataset,club_published,club_pipeline,donors,timepoints,kind,days_with_2plus_donors
+Barbry_Leroy_2020,7095.0,5266,10,0,tissue atlas (HLCA),
+Banovich_Kropski_2020,813.0,2144,17,0,tissue atlas (HLCA),
+Seibold_2020,496.0,318,6,0,tissue atlas (HLCA),
+Nawijn_2021,1782.0,479,6,0,tissue atlas (HLCA),
+Misharin_2021,23.0,514,2,0,tissue atlas (HLCA),
+Krasnow_2020,51.0,561,3,0,tissue atlas (HLCA),
+Misharin_Budinger_2018,4.0,35,1,0,tissue atlas (HLCA),
+Lafyatis_Rojas_2019,122.0,83,1,0,tissue atlas (HLCA),
+Teichmann_Meyer_2019,4.0,0,0,0,tissue atlas (HLCA),
+Meyer_2019,5.0,0,0,0,tissue atlas (HLCA),
+nasal ALI GSE121600,,3028,2,8,ALI differentiation time course,2.0
+bronchial ALI GSE233145,,9597,2,7,ALI differentiation time course,7.0

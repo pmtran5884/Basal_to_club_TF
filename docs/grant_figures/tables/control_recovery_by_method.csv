@@ -1,0 +1,53 @@
+lineage,tf,method,pct
+ciliated,FOXJ1,VIPER static (matched contrast),0.000651890482398957
+ciliated,FOXJ1,VIPER static (club contrast),0.09523809523809523
+ciliated,FOXJ1,DREM nasal (matched lineage),0.002
+ciliated,FOXJ1,DREM bronchial (matched lineage),0.003
+ciliated,RFX2,VIPER static (matched contrast),0.003259452411994785
+ciliated,RFX2,VIPER static (club contrast),0.3013698630136986
+ciliated,RFX2,DREM nasal (matched lineage),0.007
+ciliated,RFX2,DREM bronchial (matched lineage),0.005
+ciliated,RFX3,VIPER static (matched contrast),0.001955671447196871
+ciliated,RFX3,VIPER static (club contrast),0.11219830397912589
+ciliated,RFX3,DREM nasal (matched lineage),0.02
+ciliated,RFX3,DREM bronchial (matched lineage),0.006
+ciliated,TP73,VIPER static (matched contrast),0.046284224250325946
+ciliated,TP73,VIPER static (club contrast),0.4931506849315068
+ciliated,TP73,DREM nasal (matched lineage),0.046
+ciliated,TP73,DREM bronchial (matched lineage),0.025
+ciliated,MYB,VIPER static (matched contrast),0.02607561929595828
+ciliated,MYB,VIPER static (club contrast),0.03522504892367906
+ciliated,MYB,DREM nasal (matched lineage),0.527
+ciliated,MYB,DREM bronchial (matched lineage),0.025
+goblet,SPDEF,VIPER static (matched contrast),0.033246414602346806
+goblet,SPDEF,VIPER static (club contrast),0.04174820613176777
+goblet,SPDEF,DREM nasal (matched lineage),0.041
+goblet,SPDEF,DREM bronchial (matched lineage),0.426
+goblet,CREB3L1,VIPER static (matched contrast),0.01694915254237288
+goblet,CREB3L1,VIPER static (club contrast),0.02674494455316373
+goblet,CREB3L1,DREM nasal (matched lineage),0.44
+goblet,CREB3L1,DREM bronchial (matched lineage),0.396
+goblet,XBP1,VIPER static (matched contrast),0.002607561929595828
+goblet,XBP1,VIPER static (club contrast),0.0019569471624266144
+goblet,XBP1,DREM nasal (matched lineage),0.078
+goblet,XBP1,DREM bronchial (matched lineage),0.694
+club (prior),ELF3,VIPER static (matched contrast),0.0032615786040443573
+club (prior),ELF3,VIPER static (club contrast),0.0032615786040443573
+club (prior),ELF3,DREM nasal (matched lineage),0.031
+club (prior),ELF3,DREM bronchial (matched lineage),0.07
+club (prior),KLF5,VIPER static (matched contrast),0.9843444227005871
+club (prior),KLF5,VIPER static (club contrast),0.9843444227005871
+club (prior),KLF5,DREM nasal (matched lineage),0.013
+club (prior),KLF5,DREM bronchial (matched lineage),0.465
+club (prior),SOX2,VIPER static (matched contrast),0.7051532941943901
+club (prior),SOX2,VIPER static (club contrast),0.7051532941943901
+club (prior),SOX2,DREM nasal (matched lineage),0.574
+club (prior),SOX2,DREM bronchial (matched lineage),0.517
+club (prior),CEBPB,VIPER static (matched contrast),0.6333985649054142
+club (prior),CEBPB,VIPER static (club contrast),0.6333985649054142
+club (prior),CEBPB,DREM nasal (matched lineage),0.252
+club (prior),CEBPB,DREM bronchial (matched lineage),0.428
+club (prior),FOXA2,VIPER static (matched contrast),0.005218525766470972
+club (prior),FOXA2,VIPER static (club contrast),0.005218525766470972
+club (prior),FOXA2,DREM nasal (matched lineage),
+club (prior),FOXA2,DREM bronchial (matched lineage),0.405

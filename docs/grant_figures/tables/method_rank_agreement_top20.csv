@@ -1,0 +1,13 @@
+,"VIPER static
+(resolver labels)","VIPER static
+(atlas labels)","DREM time course
+(nasal)","DREM time course
+(bronchial)"
+"VIPER static
+(resolver labels)",20.0,16.0,0.0,0.0
+"VIPER static
+(atlas labels)",16.0,20.0,0.0,0.0
+"DREM time course
+(nasal)",0.0,0.0,20.0,2.0
+"DREM time course
+(bronchial)",0.0,0.0,2.0,20.0

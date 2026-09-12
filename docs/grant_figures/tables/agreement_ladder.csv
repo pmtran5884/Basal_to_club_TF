@@ -1,0 +1,15 @@
+level,dataset,rho,top20
+"technical resampling
+(split-half, same donors/days)",nasal,0.9976815725005846,18.333333333333332
+"cell-labeling method
+(same donor, 2 label arms)",nasal,0.628,11.0
+"cell-labeling method
+(same donor, 2 label arms)",bronchial,0.835,17.0
+"donor
+(same dataset, 2 donors)",nasal,0.228,6.5
+"donor
+(same dataset, 2 donors)",bronchial,0.493,7.0
+"tissue
+(nasal vs bronchial)",both,0.374,2.0
+"inference method
+(VIPER vs DREM)",both,0.01877987503483624,0.0
