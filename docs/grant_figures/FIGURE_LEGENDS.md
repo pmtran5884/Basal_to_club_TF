@@ -24,7 +24,7 @@ area scales with total epithelial cells. The shaded quadrant marks the minimum j
 requirement for trajectory-based TF inference used throughout this proposal: >=3,000
 club cells **and** >=3 time points. No dataset falls in it. Tissue atlases have no
 differentiation axis by construction (*y* = 0); the two ALI courses have a time axis
-but only 2 donors each, and the deepest (GSE233145, 9,462 club cells across 7 days) is
+but only 2 donors each, and the deepest (GSE233145, 9,597 club cells across 7 days) is
 Drop-seq at 418 median genes per cell.
 
 **b. The same cells, three club definitions.** For each HLCA study, cells called club by
